@@ -1,0 +1,435 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<head><title>Тест на мышление 1</title>
+<body>
+<script language="javascript1.2">
+answer1 = "bugaga";
+q = new Array();
+
+q['q1'] = 'b2ccfbb20d65071dad5345fbee75081f74d99ea3';
+q['q2'] = '133a5949f1bb117e8456c473bde6bb0a9e2e0736';
+q['q3'] = '326f023512f8bf237d9a14dacf65d320ed6b47b7';
+q['q4'] = '13bd298cf84d97edfd82488180eba7b4675e8422';
+q['q5'] = 'af63b86f9fd4a1d451cc941fda4933f58661fddd';
+q['q6'] = '5b5a3fa7e1f9d49b249892fb64076a7de41e6470';
+q['q7'] = '07a5e53e73e25969de3314666b5de70b5e46d239';
+q['q8'] = 'c9296fc5ba4e38e347be27a52bcea12608b67b7a';
+q['q9'] = 'b955bc656d83a6f1b6568f86181336957998660f';
+q['q10'] = '148a95c635e18302379afc9dad50b001caa78e6f';
+q['q11'] = '59b7500521e42ce08d007ccf1bb79da69cb9e58e';
+q['q12'] = '0f22cd03b459d5fa3eb02c595785d6340b6d6bc6';
+q['q13'] = '015cd2f9ed99535796c67c54513e60069493b5a4';
+q['q14'] = 'b0edb8b58547036ef6e31274cfcd1eca89f0700e';
+q['q15'] = '37740eb0d78c8632301933096e7c6a295a42e51d';
+q['q16'] = '365a81f66f7ce7c5033a4c0217dbb15e6fc7c41c';
+q['q17'] = 'eafd4dbe2d0ef3c86b916f95c4bae8bd8d7aa401';
+q['q18'] = 'f6fd1be236aad376fac6a4fbdb18b0f47cac5dc7';
+q['q19'] = '4b49b5285d0e6a774afa44b15e80dd73d40e2487';
+q['q20'] = 'c265f41333c249dff33b85cb4f2a8396b0661032';
+q['q21'] = '8f2578c90d9343e5fbd8223170f82a2afea63f02';
+q['q22'] = 'd0bc04b4f41866de4262db095a385f44bdd21ff8';
+q['q23'] = 'ad3b28cedbbd521da2393aebb18b1a6b6867c386';
+q['q24'] = 'e51456647da39fa861cd348343a7ffb18f8f8f3b';
+q['q25'] = 'b0c72905fac742c6b48f6c6606007d9ef16ab98a';
+q['q26'] = '49a753b767e639367c1af738c38b1f89c6b05af6';
+q['q27'] = '84ec71e5fc27262738331af687ca2eecf5bf7a2f';
+q['q28'] = '3485f20ef97d5993eaa2eb96d2c4122616389c23';
+q['q29'] = '237f137cacb7165171418bee04eb6c58e48bd449';
+q['q30'] = 'f27dc1254b4ffc626d01c1ce2ffc28c69d75c6b3';
+q['q31'] = '7f55cd794c74222eec25fa72211714c834175113';
+q['q32'] = 'c90623dab9378f0604ec75db59411ea25636d40d';
+q['q33'] = '1d85ca90f638c04e8db11bd9b1ba20b243cbcd19';
+
+
+
+function checkQ(str) {
+if(sha1Hash(document.getElementById(str).value.toUpperCase()) == q[str])
+{
+validate1(str);
+}
+else
+{
+validate2(str);
+}
+
+}
+function validate1(qstr) {
+if(document.getElementById(qstr).disabled == false) {
+document.getElementById(qstr).disabled = true;
+document.getElementById(qstr).style.border = '2px solid #00FF00';
+document.getElementById('correct').innerHTML = document.getElementById('correct').innerHTML*1 + 1;
+}
+}
+
+function validate2(qstr) {
+if(document.getElementById(qstr).value=='') {
+document.getElementById(qstr).style.border = '1px solid #A5ACB2';
+}
+else
+{
+document.getElementById(qstr).style.border = '2px solid #FF0000';
+}
+}
+
+
+function sha1Hash(msg)
+{
+    // constants [4.2.1]
+    var K = [0x5a827999, 0x6ed9eba1, 0x8f1bbcdc, 0xca62c1d6];
+
+    // PREPROCESSING
+
+    msg += String.fromCharCode(0x80);  // add trailing '1' bit to string [5.1.1]
+
+    // convert string msg into 512-bit/16-integer blocks arrays of ints [5.2.1]
+    var l = Math.ceil(msg.length/4) + 2;  // long enough to contain msg plus 2-word length
+    var N = Math.ceil(l/16);              // in N 16-int blocks
+    var M = new Array(N);
+
+    for (var i=0; i<N; i++) {
+        M[i] = new Array(16);
+        for (var j=0; j<16; j++) {  // encode 4 chars per integer, big-endian encoding
+            M[i][j] = (msg.charCodeAt(i*64+j*4)<<24) | (msg.charCodeAt(i*64+j*4+1)<<16) |
+                      (msg.charCodeAt(i*64+j*4+2)<<8) | (msg.charCodeAt(i*64+j*4+3));
+        } // note running off the end of msg is ok 'cos bitwise ops on NaN return 0
+    }
+    // add length (in bits) into final pair of 32-bit integers (big-endian) [5.1.1]
+    M[N-1][14] = ((msg.length-1) >>> 30) * 8;
+    M[N-1][15] = ((msg.length-1)*8) & 0xffffffff;
+
+    // set initial hash value [5.3.1]
+    var H0 = 0x67452301;
+    var H1 = 0xefcdab89;
+    var H2 = 0x98badcfe;
+    var H3 = 0x10325476;
+    var H4 = 0xc3d2e1f0;
+
+    // HASH COMPUTATION [6.1.2]
+
+    var W = new Array(80); var a, b, c, d, e;
+    for (var i=0; i<N; i++) {
+
+        // 1 - prepare message schedule 'W'
+        for (var t=0;  t<16; t++) W[t] = M[i][t];
+        for (var t=16; t<80; t++) W[t] = ROTL(W[t-3] ^ W[t-8] ^ W[t-14] ^ W[t-16], 1);
+
+        // 2 - initialise five working variables a, b, c, d, e with previous hash value
+        a = H0; b = H1; c = H2; d = H3; e = H4;
+
+        // 3 - main loop
+        for (var t=0; t<80; t++) {
+            var s = Math.floor(t/20); // seq for blocks of 'f' functions and 'K' constants
+            var T = (ROTL(a,5) + f(s,b,c,d) + e + K[s] + W[t]) & 0xffffffff;
+            e = d;
+            d = c;
+            c = ROTL(b, 30);
+            b = a;
+            a = T;
+        }
+
+        // 4 - compute the new intermediate hash value
+        H0 = (H0+a) & 0xffffffff;  // note 'addition modulo 2^32'
+        H1 = (H1+b) & 0xffffffff;
+        H2 = (H2+c) & 0xffffffff;
+        H3 = (H3+d) & 0xffffffff;
+        H4 = (H4+e) & 0xffffffff;
+    }
+
+    return H0.toHexStr() + H1.toHexStr() + H2.toHexStr() + H3.toHexStr() + H4.toHexStr();
+}
+
+//
+// function 'f' [4.1.1]
+//
+function f(s, x, y, z)
+{
+    switch (s) {
+    case 0: return (x & y) ^ (~x & z);
+    case 1: return x ^ y ^ z;
+    case 2: return (x & y) ^ (x & z) ^ (y & z);
+    case 3: return x ^ y ^ z;
+    }
+}
+
+//
+// rotate left (circular left shift) value x by n positions [3.2.5]
+//
+function ROTL(x, n)
+{
+    return (x<<n) | (x>>>(32-n));
+}
+
+//
+// extend Number class with a tailored hex-string method
+//   (note toString(16) is implementation-dependant, and
+//   in IE returns signed numbers when used on full words)
+//
+Number.prototype.toHexStr = function()
+{
+    var s="", v;
+    for (var i=7; i>=0; i--) { v = (this>>>(i*4)) & 0xf; s += v.toString(16); }
+    return s;
+}
+function resetForm() {
+
+for(i=1;i<34;i++) {
+document.getElementById('q'+i).disabled = false;
+}
+document.forms[0].reset();
+}
+//end of antoha's js
+function RandomImage(images)
+{
+ imageSet = new Array();
+ imageSet = images.split(",");
+ ind = Math.floor(Math.random() *imageSet.length);
+ return imageSet[ind];
+}
+
+function OpenPic(PicName)
+{
+var image=RandomImage(PicName);
+window.open("http://www.grog.vsu.ru/show.php?img="+image, "", "scrollbars=no,resizable=no")
+}
+
+function OpenUrl(Url)
+{
+window.open("http://www.grog.vsu.ru/show.php?img="+Url, "", "scrollbars=no,resizable=no")
+}
+
+function AreYouReally()
+{
+return confirm("Вы уверены, что хотите удалить это сообщение?");
+}
+
+function smilie(thesmilie) {
+// inserts smilie text
+document.write_message.user_message.value += thesmilie+" ";
+document.write_message.user_message.focus();
+}
+
+function SelectAll(mark)
+{
+  for (i = 0; i < document.forms['delete_form'].elements.length; i++)
+   {
+    var item = document.forms['delete_form'].elements[i];
+    if (item.name == "del_id[]")
+     {
+      item.checked = mark;
+     };
+   }
+}
+
+function CheckSelect(form)
+{
+  for (i = 0; i <form.elements.length; i++)
+  {
+    var item = form.elements[i];
+    if (item.name == "del_id[]")
+    {
+      if (item.checked){
+
+	return true;
+
+      }
+    }
+  }
+  alert("Не выбраны сообщения");
+  return false;
+}
+
+</script>
+<p align="center"><b>Ну что-ж, пора подразмять мозги.<br>
+<table class="head" cellspacing="5" cellpadding="5" align="center" border="0">
+  <tbody>
+  <tr align="left">
+    <td class="title" colspan="3">Определите, что зашифровано заглавными буквами. 
+      См. пример.<br>Ответы должны быть точными (без орфографических ошибок и 
+      лишних пробелов) и написаны заглавными буквами.<br>Время для прохождения 
+      теста неограничено. Ответы проверяются автоматически при вводе 
+    текста.<br></td></tr>
+  <tr align="middle">
+    <td class="title2" colspan="3">Попробуйте набрать более 20 правильных 
+    ответов.</td></tr></tbody></table><br>
+<table class="head" cellspacing="5" cellpadding="5" align="center" border="0">
+  <tbody>
+  <tr class="rows">
+    <td class="title6">Пример</td>
+    <td><b>24 Ч в С</b></td>
+    <td><input id="q0" disabled value="24 ЧАСА В СУТКАХ" name="q0"></td></tr>
+  <tr class="rows">
+    <td class="title6">1</td>
+    <td><b>26 Б в А А</b></td>
+    <td><input id="q1" onkeyup="javascript: 
+checkQ('q1')"></td></tr>
+  <tr class="rows">
+    <td class="title6">2</td>
+    <td><b>12 З З </b></td>
+    <td><input id="q2" onkeyup="javascript: checkQ('q2') 
+"></td></tr>
+  <tr class="rows">
+    <td class="title6">3</td>
+    <td><b>90 Г в П У</b></td>
+    <td><input id="q3" onkeyup="javascript: 
+checkQ('q3')"></td></tr>
+  <tr class="rows">
+    <td class="title6">4</td>
+    <td><b>100 К в Р</b></td>
+    <td><input id="q4" onkeyup="javascript: 
+checkQ('q4')"></td></tr>
+  <tr class="rows">
+    <td class="title6">5</td>
+    <td><b>29 Д в Ф в В Г</b></td>
+    <td><input id="q5" onkeyup="javascript: 
+checkQ('q5')"></td></tr>
+  <tr class="rows">
+    <td class="title6">6</td>
+    <td><b>36 К в К</b></td>
+    <td><input id="q6" onkeyup="javascript: 
+checkQ('q6')"></td></tr>
+  <tr class="rows">
+    <td class="title6">7</td>
+    <td><b>365 Д в Г</b></td>
+    <td><input id="q7" onkeyup="javascript: 
+checkQ('q7')"></td></tr>
+  <tr class="rows">
+    <td class="title6">8</td>
+    <td><b>6 С на Г</b></td>
+    <td><input id="q8" onkeyup="javascript: 
+checkQ('q8')"></td></tr>
+  <tr class="rows">
+    <td class="title6">9</td>
+    <td><b>60 С в М</b></td>
+    <td><input id="q9" onkeyup="javascript: 
+checkQ('q9')"></td></tr>
+  <tr class="rows">
+    <td class="title6">10</td>
+    <td><b>7 Д в Н</b></td>
+    <td><input id="q10" onkeyup="javascript: 
+checkQ('q10')"></td></tr>
+  <tr class="rows">
+    <td class="title6">11</td>
+    <td><b>3 Т 3 В Д</b></td>
+    <td><input id="q11" onkeyup="javascript: 
+checkQ('q11')"></td></tr>
+  <tr class="rows">
+    <td class="title6">12</td>
+    <td><b>9 Ж у К</b></td>
+    <td><input id="q12" onkeyup="javascript: 
+checkQ('q12')"></td></tr>
+  <tr class="rows">
+    <td class="title6">13</td>
+    <td><b>1024 Б в К</b></td>
+    <td><input id="q13" onkeyup="javascript: 
+checkQ('q13')"></td></tr>
+  <tr class="rows">
+    <td class="title6">14</td>
+    <td><b>23 П Х у Ч</b></td>
+    <td><input id="q14" onkeyup="javascript: 
+checkQ('q14')"></td></tr>
+  <tr class="rows">
+    <td class="title6">15</td>
+    <td><b>33 Б в А</b></td>
+    <td><input id="q15" onkeyup="javascript: 
+checkQ('q15')"></td></tr>
+  <tr class="rows">
+    <td class="title6">16</td>
+    <td><b>64 К на Ш Д</b></td>
+    <td><input id="q16" onkeyup="javascript: 
+checkQ('q16')"></td></tr>
+  <tr class="rows">
+    <td class="title6">17</td>
+    <td><b>15 Ч на С М</b></td>
+    <td><input id="q17" onkeyup="javascript: 
+checkQ('q17')"></td></tr>
+  <tr class="rows">
+    <td class="title6">18</td>
+    <td><b>5 П на Р</b></td>
+    <td><input id="q18" onkeyup="javascript: 
+checkQ('q18')"></td></tr>
+  <tr class="rows">
+    <td class="title6">19</td>
+    <td><b>7 Ч С</b></td>
+    <td><input id="q19" onkeyup="javascript: 
+checkQ('q19')"></td></tr>
+  <tr class="rows">
+    <td class="title6">20</td>
+    <td><b>180 Г - С У Т</b></td>
+    <td><input id="q20" onkeyup="javascript: 
+checkQ('q20')"></td></tr>
+  <tr class="rows">
+    <td class="title6">21</td>
+    <td><b>у О 8 Н</b></td>
+    <td><input id="q21" onkeyup="javascript: 
+checkQ('q21')"></td></tr>
+  <tr class="rows">
+    <td class="title6">22</td>
+    <td><b>40 Г в В</b></td>
+    <td><input id="q22" onkeyup="javascript: 
+checkQ('q22')"></td></tr>
+  <tr class="rows">
+    <td class="title6">23</td>
+    <td><b>О 3 Г Ж</b></td>
+    <td><input id="q23" onkeyup="javascript: 
+checkQ('q23')"></td></tr>
+  <tr class="rows">
+    <td class="title6">24</td>
+    <td><b>7 П на Н</b></td>
+    <td><input id="q24" onkeyup="javascript: 
+checkQ('q24')"></td></tr>
+  <tr class="rows">
+    <td class="title6">25</td>
+    <td><b>1 Р не П</b></td>
+    <td><input id="q25" onkeyup="javascript: 
+checkQ('q25')"></td></tr>
+  <tr class="rows">
+    <td class="title6">26</td>
+    <td><b>7 Р О, 1 Р О</b></td>
+    <td><input id="q26" onkeyup="javascript: 
+checkQ('q26')"></td></tr>
+  <tr class="rows">
+    <td class="title6">27</td>
+    <td><b>Д у П П Е N 3310</b></td>
+    <td><input id="q27" onkeyup="javascript: 
+checkQ('q27')"></td></tr>
+  <tr class="rows">
+    <td class="title6">28</td>
+    <td><b>П 13</b></td>
+    <td><input id="q28" onkeyup="javascript: 
+checkQ('q28')"></td></tr>
+  <tr class="rows">
+    <td class="title6">29</td>
+    <td><b>38 П и 1 П К</b></td>
+    <td><input id="q29" onkeyup="javascript: 
+checkQ('q29')"></td></tr>
+  <tr class="rows">
+    <td class="title6">30</td>
+    <td><strong>3 Т на П</strong></td>
+    <td><input id="q30" onkeyup="javascript: 
+checkQ('q30')"></td></tr>
+  <tr class="rows">
+    <td class="title6">31</td>
+    <td><b>2 Ж 2 4</b></td>
+    <td><input id="q31" onkeyup="javascript: 
+checkQ('q31')"></td></tr>
+  <tr class="rows">
+    <td class="title6">32</td>
+    <td><b>5ти З К</b></td>
+    <td><input id="q32" onkeyup="javascript: 
+checkQ('q32')"></td></tr>
+  <tr class="rows">
+    <td class="title6">33</td>
+    <td><b>98 М Д</b></td>
+    <td><input id="q33" onkeyup="javascript: 
+checkQ('q33')"></td></tr>
+  <tr align="middle">
+    <td class="title5" colspan="3"><strong>Результаты:</strong> 1-4 Очень низкий 
+      уровень (Даун), 5-8 Низкий уровень (Тормоз), 9-13 Средний уровень (Норма), 
+      14-20 Хороший уровень (Талант), 21-33 Отлично (Гений)</td></tr>
+  <tr>
+    <td class="title3" align="right" colspan="2" height="40"><strong>ПРАВИЛЬНЫХ 
+      ОТВЕТОВ:</strong></td>
+    <td class="title4" height="40"><span id="correct">0</span> <span class="title3">/ 
+      33</span></td></tr></tbody></table>
+</body></html>
+<!-- This document saved from http://fourty.on.ufanet.ru/test01.htm -->
